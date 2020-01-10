@@ -8,7 +8,9 @@
         x:Class="Mapsui.Samples.Avalonia.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Mapsui.UI.Avalonia.Test">
-
+  <Grid RowDefinitions="50,*" ColumnDefinitions="*">
+    <TextBlock Grid.Row="0" Text="Name" Margin="0,0,0,3" />
+    <map:MapControl Grid.Row="1" x:Name="map" Background="Transparent"/>    
+  </Grid>
   
-  <map:MapControl Name="map" Background="Transparent"/>
 </Window>

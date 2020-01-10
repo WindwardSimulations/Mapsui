@@ -2,6 +2,8 @@
 using Avalonia.Collections;
 using Avalonia.Controls;
 using Avalonia.Controls.Shapes;
+using Avalonia.Input;
+using Avalonia.Input.GestureRecognizers;
 using Avalonia.Interactivity;
 using Avalonia.Layout;
 using Avalonia.Markup.Xaml;
@@ -14,6 +16,7 @@ using Mapsui.Layers;
 using Mapsui.Providers;
 using Mapsui.Rendering.Skia;
 using Mapsui.Utilities;
+using SkiaSharp;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -77,8 +80,15 @@ namespace Mapsui.UI.Avalonia
                 IsManipulationEnabled = true;
             */
 
+         
+
         }
-               
+
+        protected override Size MeasureOverride(Size constraint)
+        {
+            return constraint;
+        }
+
         protected override Size ArrangeOverride(Size finalSize)
         {
             ViewportWidth = (float)finalSize.Width;
@@ -244,7 +254,7 @@ namespace Mapsui.UI.Avalonia
         private void MapControlMouseLeave(object sender, global::Avalonia.Input.PointerEventArgs e)
         {
             _previousMousePosition = new Geometries.Point();
-          //  ReleaseMouseCapture();
+            //  ReleaseMouseCapture();
         }
         
         private void RunOnUIThread(Action action)
@@ -268,23 +278,24 @@ namespace Mapsui.UI.Avalonia
         }
 
         
-                private void MapControlMouseLeftButtonDown( global::Avalonia.Input.PointerPressedEventArgs e)
+        private void MapControlMouseLeftButtonDown( global::Avalonia.Input.PointerPressedEventArgs e)
+        {
+            var touchPosition = e.GetPosition(this).ToMapsui();
+            _previousMousePosition = touchPosition;
+            _downMousePosition = touchPosition;
+            _mouseDown = true;
+            e.Pointer.Capture(this);
+        //     CaptureMouse();
+                    
+            if (!IsInBoxZoomMode())
+            {
+                if (IsClick(_currentMousePosition, _downMousePosition))
                 {
-                    var touchPosition = e.GetPosition(this).ToMapsui();
-                    _previousMousePosition = touchPosition;
-                    _downMousePosition = touchPosition;
-                    _mouseDown = true;
-               //     CaptureMouse();
-
-                    if (!IsInBoxZoomMode())
-                    {
-                        if (IsClick(_currentMousePosition, _downMousePosition))
-                        {
-                            HandleFeatureInfo(e);
-                            OnInfo(InvokeInfo(touchPosition, _downMousePosition, e.ClickCount));
-                        }
-                    }
+                    HandleFeatureInfo(e);
+                    OnInfo(InvokeInfo(touchPosition, _downMousePosition, e.ClickCount));
                 }
+            }
+        }
         
         private static bool IsInBoxZoomMode()
         {
@@ -313,7 +324,7 @@ namespace Mapsui.UI.Avalonia
             _mouseDown = false;
 
             _previousMousePosition = new Geometries.Point();
-      //      ReleaseMouseCapture();
+       //      ReleaseMouseCapture();
         }
         
         private static bool IsClick(Geometries.Point currentPosition, Geometries.Point previousPosition)
@@ -538,6 +549,7 @@ namespace Mapsui.UI.Avalonia
                 else
                 {
                     canvas.Save();
+                    canvas.ClipRect(new SKRect(0, 0, (float)Bounds.Width, (float)Bounds.Height));
                     _mapControl.Renderer.Render(canvas, 
                         _mapControl.Viewport,
                         _mapControl.Map.Layers,
