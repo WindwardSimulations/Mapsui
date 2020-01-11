@@ -50,6 +50,7 @@ namespace Mapsui.UI.Avalonia
 
         public MapControl()
         {
+            ClipToBounds = true;
             Children.Add(_selectRectangle);
 
             //     SkiaCanvas.IgnorePixelScaling = true;
@@ -99,7 +100,8 @@ namespace Mapsui.UI.Avalonia
 
         public override void Render(DrawingContext context)
         {
-            if (_drawOp == null) _drawOp = new MapsuiCustomDrawOp(new Rect(0, 0, Bounds.Width, Bounds.Height), this);
+            if (_drawOp == null) _drawOp = new MapsuiCustomDrawOp(new Rect(0,0,Bounds.Width,Bounds.Height), this);
+            _drawOp.Bounds = new Rect(0, 0, Bounds.Width, Bounds.Height);
             context.Custom(_drawOp);
         }
 
@@ -536,8 +538,11 @@ namespace Mapsui.UI.Avalonia
                 // No-op
             }
 
-            public Rect Bounds { get; }
-            public bool HitTest(Point p) => true;
+            public Rect Bounds { get; set; }
+            public bool HitTest(Point p)
+            {
+                return true;
+            }
             public bool Equals(ICustomDrawOperation other) => false;
             public void Render(IDrawingContextImpl context)
             {
@@ -549,7 +554,6 @@ namespace Mapsui.UI.Avalonia
                 else
                 {
                     canvas.Save();
-                    canvas.ClipRect(new SKRect(0, 0, (float)Bounds.Width, (float)Bounds.Height));
                     _mapControl.Renderer.Render(canvas, 
                         _mapControl.Viewport,
                         _mapControl.Map.Layers,

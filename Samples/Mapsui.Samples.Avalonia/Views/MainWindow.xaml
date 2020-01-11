@@ -8,9 +8,19 @@
         x:Class="Mapsui.Samples.Avalonia.Views.MainWindow"
         Icon="/Assets/avalonia-logo.ico"
         Title="Mapsui.UI.Avalonia.Test">
-  <Grid RowDefinitions="50,*" ColumnDefinitions="*">
-    <TextBlock Grid.Row="0" Text="Name" Margin="0,0,0,3" />
-    <map:MapControl Grid.Row="1" x:Name="map" Background="Transparent"/>    
+  <Grid>
+    <TabControl>
+      <TabItem Header="Data" >
+        <TextBlock Text="Name" Margin="0,0,0,3" />
+      </TabItem>
+      <TabItem Header="Map" >
+        <Grid RowDefinitions="50,50,*" >
+          <TextBlock Grid.Row="0" Text="Name" Margin="0,0,0,3" />
+          <Slider Grid.Row="1" />
+          <map:MapControl Grid.Row="2" x:Name="map" Background="Transparent" />
+        </Grid>
+      </TabItem>
+    </TabControl>
   </Grid>
   
 </Window>
