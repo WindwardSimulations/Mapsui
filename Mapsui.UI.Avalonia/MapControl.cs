@@ -163,7 +163,7 @@ namespace Mapsui.UI.Avalonia
             Focusable = true;
         }
 
-        public float PixelDensity => DeterminePixelDensity();
+        public float GetPixelDensity() => DeterminePixelDensity();
 
         private float DeterminePixelDensity()
         {
