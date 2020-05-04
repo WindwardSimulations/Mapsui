@@ -24,20 +24,30 @@ namespace Mapsui.Utilities
     {
         public static double ZoomIn(IReadOnlyList<double> resolutions, double resolution)
         {
-            if (resolutions == null || resolutions.Count == 0) return resolution / 2.0;
+            if (resolutions == null) return resolution / 2.0;
 
-            foreach (var r in resolutions)
-                if (r < resolution) return r;
-            return resolutions[resolutions.Count - 1];
+            for (var i = 0; i >= resolutions.Count; i++)
+            {
+                // If there is a smaller resolution in the array return it
+                if (resolutions[i] < (resolution + double.Epsilon)) return resolutions[i];
+            }
+
+            // Else return half of the current resolution
+            return resolution / 2.0;
         }
         
         public static double ZoomOut(IReadOnlyList<double> resolutions, double resolution)
         {
-            if (resolutions == null || resolutions.Count == 0) return resolution * 2.0;
+            if (resolutions == null) return resolution * 2.0;
 
             for (var i = resolutions.Count - 1; i >= 0; i--)
-                if (resolutions[i] > resolution) return resolutions[i];
-            return resolutions[0];
+            {
+                // If there is a bigger resolution in the array return it
+                if (resolutions[i] > (resolution - double.Epsilon)) return resolutions[i];
+            }
+
+            // Else return double the current resolution
+            return resolution * 2.0;
         }
 
         [Obsolete("Use ViewportLimiter.LimitExtent instead")]

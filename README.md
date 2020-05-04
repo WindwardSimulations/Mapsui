@@ -5,12 +5,13 @@
 | Mapsui NuGet   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.svg?style=flat)](https://www.nuget.org/packages/Mapsui/) |
 | Mapsui.Forms Nuget   | [![NuGet Status](https://img.shields.io/nuget/v/Mapsui.Forms.svg?style=flat)](https://www.nuget.org/packages/Mapsui.Forms/) |
 | Build on Windows    | [![Build status](https://ci.appveyor.com/api/projects/status/p20w43qv4ixkkftp?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui) |
-| Build on Mac | [![Build Status](https://app.bitrise.io/app/119dabd1302841a1.svg?token=KH9mbi7R6uLBz0iUZjbvJw)](https://www.bitrise.io/app/119dabd1302841a1) |
 | Build docs | [![Build status](https://ci.appveyor.com/api/projects/status/c8hcfeoafmf51gin/branch/master?svg=true)](https://ci.appveyor.com/project/pauldendulk/mapsui-373p1/branch/master) |
 
 ## News
-- 2019 januari 5: As of v2.0 beta.13 there is a [separate nuget package](https://www.nuget.org/packages/Mapsui.Forms/) for Xamarin.Forms. It contains a MapControl and also a MapView component which has additional functionality out of the box. 
-- 2019 januari 5: Added a [v2.0 upgrade guide](https://mapsui.github.io/Mapsui/documentation/v2.0-upgrade-guide.html)
+
+- 2020 May 4: Released Mapsui 2.0.0!
+- 2020 March 10: Follow Mapsui on Twitter https://twitter.com/mapsui
+- 2020 Februari 2: We have a gitter channel https://gitter.im/Mapsui/Lobby
 
 ## Mapsui (pronounced map-su-wii)
 
@@ -36,7 +37,7 @@ The best way to get going with Mapsui is by using the Samples. If you clone the 
 If you have a question please submit an issue [here](https://github.com/mapsui/Mapsui/issues)
 
 ## Contributing
-See the [guidelines](CONTRIBUTING.md)
+See the [guidelines](http://mapsui.com/documentation/Contributors-Guidelines.html)
 
 ## Thanks go to
 - ReSharper for providing free open source licenses for Mapsui
@@ -52,9 +53,9 @@ See the [guidelines](CONTRIBUTING.md)
 
 ## Sponsors
 
-We are delightly with our first gold sponsor Sebastian Kruze, who has also contributed to Mapsui with informed test reports and expert advice.
+We are delighted with our first gold sponsor Sebastian Kruse, who has also contributed to Mapsui with informed test reports and expert advice.
 
-[Sebastian Kruze](https://github.com/Sebastian1989101)
+[Sebastian Kruse](https://github.com/Sebastian1989101)
 
 ## License 
 
